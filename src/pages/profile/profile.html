@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>User Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logOut()">
+        <img src="../../assets/imgs/exit.png" width="32" height="32">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      User Personal Information
+    </ion-list-header>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Email</ion-col>
+          <ion-col col-6 *ngIf="userProfile?.email">
+            {{userProfile?.email}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item (click)="updateNama()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Nama</ion-col>
+          <ion-col col-6
+            *ngIf="userProfile?.firstName || userProfile?.lastName">
+          {{userProfile?.firstName}} {{userProfile?.lastName}}
+          </ion-col>
+          <ion-col col-4 class="placeholder-profile"
+            *ngIf="!userProfile?.firstName">
+          <span>Tap untuk edit nama</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item (click)="updateTelepon()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Telepon</ion-col>
+          <ion-col col-6
+            *ngIf="userProfile?.phone">
+          {{userProfile?.phone}}
+          </ion-col>
+          <ion-col col-4 class="placeholder-profile"
+            *ngIf="!userProfile?.phone">
+          <span>Tap untuk edit telepon</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

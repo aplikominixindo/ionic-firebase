@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Halaman Utama
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToProfile()">
+        <img src="../../assets/imgs/boy.png" width="32" height="32">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h5 style="text-align: center">Aplikasi Managemen Event</h5>
+  <br>
+
+  <button ion-button block color="color1" (click)="goToCreateEvent()">
+    Buat Event Baru
+  </button>
+
+  <button ion-button block color="color2" (click)="goToListEvent()">
+    Lihat Daftar Event
+  </button>
+</ion-content>

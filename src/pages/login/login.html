@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login User</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="../../assets/imgs/login.png" width="64" height="64" class="center" />
+
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Alamat email anda" [class.invalid]="!loginForm.controls.email.valid && blur">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched">
+      <p>Isikan alamat email yang valid!</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Password anda" [class.invalid]="!loginForm.controls.password.valid && blur">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched">
+      <p>Isikan password minimal 8 karakter!</p>
+    </ion-item>
+    <br>
+    <br>
+    <button ion-button block type="submit" color="color1" [disabled]="!loginForm.valid">
+      Login
+    </button>
+  </form>
+
+  <button ion-button block clear (click)="goToSignup()">
+    Register User Baru
+  </button>
+
+  <button ion-button block clear (click)="goToResetPassword()">
+    Lupa Password
+  </button>
+</ion-content>
