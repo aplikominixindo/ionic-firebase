@@ -1,18 +1,34 @@
-<!--
-  Generated template for the EventCreatePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>EventCreate</ion-title>
+    <ion-title>Buat Event Baru</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <ion-item>
+    <ion-label stacked>Nama Event</ion-label>
+    <ion-input [(ngModel)]="eventName" type="text"></ion-input>
+  </ion-item>
 
+  <ion-item>
+    <ion-label stacked>Tanggal</ion-label>
+    <ion-datetime [(ngModel)]="eventDate" displayFormat="D MMM, YYYY" pickerFormat="DD MMMM YYYY">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Harga</ion-label>
+    <ion-input [(ngModel)]="eventPrice" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Kontak</ion-label>
+    <ion-input [(ngModel)]="eventContact" type="text"></ion-input>
+  </ion-item>
+
+  <button ion-button block 
+  color="color1" clear 
+  (click)="createEvent(eventName, eventDate, eventPrice, eventContact)">
+    Buat Event Baru
+  </button>
 </ion-content>

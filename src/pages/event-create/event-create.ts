@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the EventCreatePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { EventProvider } from '../../providers/event/event';
 
 @IonicPage()
 @Component({
@@ -15,7 +9,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EventCreatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public eventProvider: EventProvider) {
+  }
+
+  // buat event baru
+  createEvent(
+    eventName: string, eventDate: string,
+    eventPrice: number, eventContact: string
+  ): void {
+    this.eventProvider
+      .createEvent(eventName, eventDate, eventPrice, eventContact)
+      .then(newEvent => {
+        this.navCtrl.pop();
+      });
   }
 
   ionViewDidLoad() {
