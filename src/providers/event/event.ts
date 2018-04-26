@@ -25,7 +25,7 @@ export class EventProvider {
     eventPrice: number, eventContact: string
   ): ThenableReference {
     return this.eventListRef.push({
-      name: eventName, 
+      name: eventName,
       date: eventDate,
       price: eventPrice * 1,  // bertipe number diikuti *1
       contact: eventContact
@@ -40,6 +40,45 @@ export class EventProvider {
   // melihat detail dari sebuah event
   getEventDetail(eventId: string): Reference {
     return this.eventListRef.child(eventId);
+  }
+
+  // proses update eventList
+  updateEventList(
+    eventName: string, eventDate: string,
+    eventPrice: number, eventContact: string
+  ): void {
+    this.eventListRef.update({
+      eventName, eventDate, eventPrice, eventContact
+    });
+  }
+
+  // menambah peserta baru
+  addGuest(
+    guestName: string, eventId: string,
+    guestPicture: string = null
+  ): PromiseLike<any> {
+    return this.eventListRef
+      .child(`$eventId/guestList`)
+      .push({ guestName })
+      .then(newGuest => {
+        this.eventListRef.child(eventId)
+          .transaction(event => {
+            return event;
+          });
+        // cek guestPicture kosong atau tidak
+        if (guestPicture != null) {  // ada picture
+          firebase.storage()
+            .ref(`/guestProfile/${newGuest.key}/profilePicture.png`)
+            .putString(guestPicture, 'base64', {
+              contentType: 'image/png'
+            })
+            .then(savedPicture => {
+              this.eventListRef
+                .child(`${eventId}/guestList/${newGuest.key}/profilePicture`)
+                .set(savedPicture.downloadURL);
+            });
+        }
+      });
   }
 
 }
