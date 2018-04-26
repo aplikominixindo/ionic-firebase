@@ -58,7 +58,7 @@ export class EventProvider {
     guestPicture: string = null
   ): PromiseLike<any> {
     return this.eventListRef
-      .child(`$eventId/guestList`)
+      .child(`${eventId}/guestList`)
       .push({ guestName })
       .then(newGuest => {
         this.eventListRef.child(eventId)
